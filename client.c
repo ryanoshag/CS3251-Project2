@@ -168,13 +168,20 @@ int main ( int argc, char *argv[] )
 		}
 		match = 0;
 	    }
-	    printf("On both client and server:\n");
-	    for(token1 = strtok(matchBuf, "|"); token1; token1 = strtok(NULL, "|"))
-		printf("%s\n", token1);
-	    printf("\nOn server but not client:\n");
-	    for(token2 = strtok(diffBuf, "|"); token2; token2 = strtok(NULL, "|"))
-		printf("%s\n", token2);
 
+	    //Print out list of matches
+	    memset(&tmpBuf1, 0, sizeof(tmpBuf1));
+	    strcpy(tmpBuf1, matchBuf);
+	    printf("On both client and server:\n");
+	    for(token1 = strtok(tmpBuf1, "|"); token1; token1 = strtok(NULL, "|"))
+		printf("%s\n", token1);
+
+	    //Print out list of diffs
+	    memset(&tmpBuf2, 0, sizeof(tmpBuf2));
+	    strcpy(tmpBuf2, diffBuf);
+	    printf("\nOn server but not client:\n");
+	    for(token2 = strtok(tmpBuf2, "|"); token2; token2 = strtok(NULL, "|"))
+		printf("%s\n", token2);
 	}
 
 	if(strcmp(rcvInfo.requestType, "pull") == 0) {
